@@ -16,6 +16,8 @@
             <a href="{% url 'books:genre_list' %}">Список жанров</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'books:add_book' %}">Добавить книгу</a>
+                |
+                <strong>{{ user.username }}</strong>
                 <a href="{% url 'logout' %}">Выйти</a>
             {% else %}
                 <a href="{% url 'login' %}">Войти</a>
