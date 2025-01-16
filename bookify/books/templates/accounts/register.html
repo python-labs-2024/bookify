@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Регистрация</title>
-</head>
-<body>
-<h1>Регистрация</h1>
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Регистрация</h2>
 <form method="post" action="">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Зарегистрироваться</button>
 </form>
-</body>
-</html>
+{% endblock %}
