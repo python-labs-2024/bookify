@@ -44,6 +44,25 @@ def book_detail(request, pk):
 
 
 @login_required
+def edit_book(request, pk):
+    """Редактирование книги, только для её создателя."""
+    book = get_object_or_404(Book, pk=pk)
+    # Проверяем, что текущий пользователь – владелец:
+    if book.created_by != request.user:
+        raise PermissionDenied("Вы не можете редактировать чужую книгу.")
+
+    if request.method == "POST":
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect("books:book_detail", pk=book.pk)
+    else:
+        form = BookForm(instance=book)
+
+    return render(request, "books/edit_book.html", {"form": form, "book": book})
+
+
+@login_required
 def add_book(request):
     """Добавление новой книги (только авторизованный пользователь)."""
     if request.method == "POST":

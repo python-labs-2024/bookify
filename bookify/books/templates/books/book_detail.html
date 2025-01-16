@@ -17,6 +17,7 @@
 
     {% if user.is_authenticated and user == book.created_by %}
         <p>
+            <a href="{% url 'books:edit_book' book.pk %}">Редактировать книгу</a> |
             <a class="btn-delete" href="{% url 'books:delete_book' book.pk %}">Удалить книгу</a>
         </p>
     {% endif %}
