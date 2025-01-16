@@ -27,7 +27,14 @@
     <h3>Отзывы</h3>
     {% for review in reviews %}
         <div class="review">
-            <p><strong>{{ review.user.username }}</strong> ({{ review.rating }}/5)</p>
+            <p>
+                <strong>{{ review.user.username }}</strong>
+                ({{ review.rating }}/5)
+                {% if review.user == user %}
+                    <!-- Добавим ссылку на редактирование -->
+                    <a href="{% url 'books:edit_review' review.pk %}">Редактировать отзыв</a>
+                {% endif %}
+            </p>
             <p>{{ review.text }}</p>
             <hr>
         </div>
@@ -35,6 +42,7 @@
         <p>Пока нет отзывов.</p>
     {% endfor %}
 </div>
+
 
 {% if user.is_authenticated %}
     {% if user_has_review %}

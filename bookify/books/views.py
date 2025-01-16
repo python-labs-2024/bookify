@@ -121,6 +121,25 @@ def add_review(request, pk):
     return redirect("books:book_detail", pk=pk)
 
 
+@login_required
+def edit_review(request, pk):
+    """Редактирование отзыва, только если пользователь – автор."""
+    review = get_object_or_404(Review, pk=pk)
+    # Проверяем владельца
+    if review.user != request.user:
+        raise PermissionDenied("Нельзя редактировать чужой отзыв.")
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect("books:book_detail", pk=review.book.pk)
+    else:
+        form = ReviewForm(instance=review)
+
+    return render(request, "books/edit_review.html", {"form": form, "review": review})
+
+
 def genre_recommendations(request, genre_name):
     """Рекомендации книг по заданному жанру."""
     genre = get_object_or_404(Genre, name=genre_name)
