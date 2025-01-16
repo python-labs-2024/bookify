@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-c1_r=$!h*n-@r1u-r#9x*xsgs7$a*2cnr7!c8=+irf!*4@g$$2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["bookify.tishenko.dev"]
 
 
 # Application definition
