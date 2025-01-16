@@ -5,7 +5,7 @@
     {% for genre in genres %}
         <li>
             {{ genre.name }}
-            <a href="{% url 'books:genre_recommendations' genre.name %}">Перейти к книгам</a>
+            <a href="{% url 'books:genre_recommendations' genre.name %}">Перейти к рекомендациям</a>
             <!-- ссылки на редактирование/удаление жанра -->
             {% if user.is_authenticated %}
                 <a href="{% url 'books:edit_genre' genre.pk %}">Редактировать</a>

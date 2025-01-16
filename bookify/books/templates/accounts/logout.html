@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Выход</title>
-</head>
-<body>
-<h1>Вы вышли из аккаунта</h1>
-<a href="{% url 'books:book_list' %}">На главную</a>
-</body>
-</html>
+<!-- templates/accounts/logout.html -->
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Вы вышли из аккаунта</h2>
+<p><a href="{% url 'books:book_list' %}">Вернуться на главную</a></p>
+{% endblock %}

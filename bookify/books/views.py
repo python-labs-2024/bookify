@@ -21,6 +21,10 @@ def register(request):
     return render(request, "accounts/register.html", {"form": form})
 
 
+def logout(requst):
+    return render(requst, "accounts/logout.html")
+
+
 def book_list(request):
     """Главная страница со списком всех книг."""
     books = Book.objects.all()

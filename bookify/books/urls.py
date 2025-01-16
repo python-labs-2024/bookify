@@ -22,4 +22,5 @@ urlpatterns = [
         name="genre_recommendations",
     ),
     path("register/", views.register, name="register"),
+    path("succesful-logout/", views.logout, name="logout"),
 ]
