@@ -1,0 +1,15 @@
+<!-- templates/books/_book_item.html -->
+<div class="book-item">
+    <h3>
+        <a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a>
+        <small>({{ book.average_rating }})</small>
+    </h3>
+    <p>Автор: {{ book.author }}</p>
+    {% if book.genres.all %}
+        <p>Жанры:
+            {% for g in book.genres.all %}
+                <a href="{% url 'books:genre_recommendations' g.name %}">{{ g.name }}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    {% endif %}
+</div>

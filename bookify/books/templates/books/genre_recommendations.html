@@ -1,13 +1,10 @@
-<!-- books/templates/books/genre_recommendations.html -->
+<!-- templates/books/genre_recommendations.html -->
 {% extends 'books/base.html' %}
 {% block content %}
 <h2>Рекомендации по жанру "{{ genre.name }}"</h2>
 <div class="book-list">
     {% for book in books %}
-    <div class="book-item">
-        <h3><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></h3>
-        <p>Автор: {{ book.author }}</p>
-    </div>
+        {% include 'books/_book_item.html' %}
     {% endfor %}
 </div>
 {% endblock %}
