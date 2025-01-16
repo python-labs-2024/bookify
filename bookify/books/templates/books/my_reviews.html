@@ -1,0 +1,30 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<h2>Мои отзывы</h2>
+{% if reviews %}
+    <ul>
+    {% for review in reviews %}
+        <li>
+            <p>
+                <strong>Книга:</strong>
+                <a href="{% url 'books:book_detail' review.book.pk %}">
+                    {{ review.book.title }}
+                </a>
+            </p>
+            <p>
+                <strong>Рейтинг:</strong> {{ review.rating }}/5
+            </p>
+            <p>
+                <strong>Отзыв:</strong> {{ review.text }}
+            </p>
+            <!-- Ссылка Edit (уже есть view edit_review) -->
+            <p>
+                <a href="{% url 'books:edit_review' review.pk %}">Редактировать отзыв</a>
+            </p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Вы пока не оставляли отзывов.</p>
+{% endif %}
+{% endblock %}

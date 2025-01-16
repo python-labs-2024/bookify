@@ -33,6 +33,13 @@ def my_books(request):
     return render(request, "books/my_books.html", {"books": books})
 
 
+@login_required
+def my_reviews(request):
+    """Все отзывы, оставленные текущим пользователем."""
+    reviews = Review.objects.filter(user=request.user)
+    return render(request, "books/my_reviews.html", {"reviews": reviews})
+
+
 def books_rating(request):
     """
     Страница со всеми книгами, отсортированными по убыванию среднего рейтинга.
