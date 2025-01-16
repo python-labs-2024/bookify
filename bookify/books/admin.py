@@ -17,5 +17,5 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ("id", "book", "user_name", "rating", "created_at")
+    list_display = ("id", "book", "user", "rating", "created_at")
     list_filter = ("book", "rating")

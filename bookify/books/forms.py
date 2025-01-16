@@ -1,6 +1,15 @@
+# books/forms.py
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from .models import Book, Genre, Review
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ["username", "email"]
 
 
 class BookForm(forms.ModelForm):
@@ -15,7 +24,7 @@ class BookForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ["user_name", "rating", "text"]
+        fields = ["rating", "text"]
         widgets = {
             "rating": forms.NumberInput(attrs={"min": 1, "max": 5}),
         }
