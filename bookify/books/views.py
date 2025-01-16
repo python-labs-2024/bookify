@@ -2,6 +2,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import PermissionDenied
+from django.db.models import Avg
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import BookForm, CustomUserCreationForm, GenreForm, ReviewForm
@@ -23,6 +24,17 @@ def register(request):
 
 def logout(requst):
     return render(requst, "accounts/logout.html")
+
+
+def books_rating(request):
+    """
+    Страница со всеми книгами, отсортированными по убыванию среднего рейтинга.
+    """
+    # Переименуем аннотацию в avg_rating
+    books = Book.objects.annotate(avg_rating=Avg("reviews__rating")).order_by(
+        "-avg_rating"
+    )
+    return render(request, "books/books_rating.html", {"books": books})
 
 
 def book_list(request):

@@ -25,4 +25,5 @@ urlpatterns = [
     path("succesful-logout/", views.logout, name="logout"),
     path("book/<int:pk>/edit/", views.edit_book, name="edit_book"),
     path("review/<int:pk>/edit/", views.edit_review, name="edit_review"),
+    path("rating/", views.books_rating, name="books_rating"),
 ]

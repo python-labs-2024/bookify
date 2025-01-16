@@ -1,0 +1,9 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<h2>Общий рейтинг книг</h2>
+<div class="book-list">
+    {% for book in books %}
+        {% include 'books/_book_item.html' %}
+    {% endfor %}
+</div>
+{% endblock %}
