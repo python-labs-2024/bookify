@@ -1,0 +1,21 @@
+<!-- books/templates/books/book_list.html -->
+{% extends 'books/base.html' %}
+{% load static %}
+{% block content %}
+<h2>Список книг</h2>
+<div class="book-list">
+    {% for book in books %}
+    <div class="book-item">
+        <h3><a href="{% url 'books:book_detail' book.pk %}">{{ book.title }}</a></h3>
+        <p>Автор: {{ book.author }}</p>
+        {% if book.genres.all %}
+            <p>Жанры:
+                {% for g in book.genres.all %}
+                    <a href="{% url 'books:genre_recommendations' g.name %}">{{ g.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

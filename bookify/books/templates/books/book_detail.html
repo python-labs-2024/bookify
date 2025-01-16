@@ -1,0 +1,44 @@
+<!-- books/templates/books/book_detail.html -->
+{% extends 'books/base.html' %}
+{% block content %}
+<div class="book-detail">
+    <h2>{{ book.title }}</h2>
+    <p><strong>Автор:</strong> {{ book.author }}</p>
+    <p><strong>Описание:</strong> {{ book.description }}</p>
+    {% if book.cover_image %}
+        <img src="{{ book.cover_image }}" alt="Обложка книги" style="max-width:200px;">
+    {% endif %}
+
+    <p><strong>Жанры:</strong> 
+        {% for g in book.genres.all %}
+            <a href="{% url 'books:genre_recommendations' g.name %}">{{ g.name }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+
+    <p>
+        <a class="btn-delete" href="{% url 'books:delete_book' book.pk %}">Удалить книгу</a>
+    </p>
+</div>
+
+<div class="reviews-section">
+    <h3>Отзывы</h3>
+    {% for review in reviews %}
+        <div class="review">
+            <p><strong>{{ review.user_name }}</strong> ({{ review.rating }}/5)</p>
+            <p>{{ review.text }}</p>
+            <hr>
+        </div>
+    {% empty %}
+        <p>Пока нет отзывов.</p>
+    {% endfor %}
+</div>
+
+<div class="add-review">
+    <h3>Добавить отзыв</h3>
+    <form method="POST" action="{% url 'books:add_review' book.pk %}">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+{% endblock %}

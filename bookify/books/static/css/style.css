@@ -1,0 +1,73 @@
+/* static/css/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #eee;
+    padding: 15px;
+}
+
+header h1, header nav {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: #333;
+}
+
+header nav {
+    float: right;
+}
+
+header nav a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+.book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.book-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.book-item h3 {
+    margin: 5px 0;
+}
+
+.btn-delete {
+    color: red;
+    text-decoration: none;
+}
+
+.reviews-section {
+    margin-top: 20px;
+}
+
+.review {
+    margin-bottom: 10px;
+}
+
+.add-review {
+    margin-top: 20px;
+}
+
+footer p {
+    text-align: center;
+    margin: 0;
+}
