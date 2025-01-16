@@ -26,6 +26,13 @@ def logout(requst):
     return render(requst, "accounts/logout.html")
 
 
+@login_required
+def my_books(request):
+    """Список книг, добавленных текущим пользователем."""
+    books = Book.objects.filter(created_by=request.user)
+    return render(request, "books/my_books.html", {"books": books})
+
+
 def books_rating(request):
     """
     Страница со всеми книгами, отсортированными по убыванию среднего рейтинга.

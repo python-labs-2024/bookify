@@ -1,0 +1,11 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<h2>Мои книги</h2>
+<div class="book-list">
+    {% for book in books %}
+        {% include 'books/_book_item.html' %}
+    {% empty %}
+        <p>У вас нет добавленных книг.</p>
+    {% endfor %}
+</div>
+{% endblock %}
