@@ -32,14 +32,23 @@ def book_list(request):
 
 
 def book_detail(request, pk):
-    """Детальная страница книги."""
     book = get_object_or_404(Book, pk=pk)
     reviews = book.reviews.all()
     review_form = ReviewForm()
+
+    user_has_review = False
+    if request.user.is_authenticated:
+        user_has_review = reviews.filter(user=request.user).exists()
+
     return render(
         request,
         "books/book_detail.html",
-        {"book": book, "reviews": reviews, "review_form": review_form},
+        {
+            "book": book,
+            "reviews": reviews,
+            "review_form": review_form,
+            "user_has_review": user_has_review,
+        },
     )
 
 
@@ -92,8 +101,16 @@ def delete_book(request, pk):
 
 @login_required
 def add_review(request, pk):
-    """Добавление отзыва к книге (только авторизованный пользователь)."""
     book = get_object_or_404(Book, pk=pk)
+
+    # Проверяем, не оставил ли уже этот пользователь отзыв
+    existing_review = Review.objects.filter(book=book, user=request.user).first()
+    if existing_review:
+        # Если уже есть отзыв, можно показать сообщение или
+        # перенаправить на страницу книги с сообщением
+        # Для простоты сделаем редирект с GET-параметром
+        return redirect("books:book_detail", pk=pk)
+
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():

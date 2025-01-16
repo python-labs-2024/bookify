@@ -37,14 +37,18 @@
 </div>
 
 {% if user.is_authenticated %}
-    <div class="add-review">
-        <h3>Добавить отзыв</h3>
-        <form method="POST" action="{% url 'books:add_review' book.pk %}">
-            {% csrf_token %}
-            {{ review_form.as_p }}
-            <button type="submit">Отправить</button>
-        </form>
-    </div>
+    {% if user_has_review %}
+        <p>Вы уже оставили отзыв.</p>
+    {% else %}
+        <div class="add-review">
+            <h3>Добавить отзыв</h3>
+            <form method="POST" action="{% url 'books:add_review' book.pk %}">
+                {% csrf_token %}
+                {{ review_form.as_p }}
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    {% endif %}
 {% else %}
     <p>Для добавления отзывов <a href="{% url 'login' %}">войдите</a> или <a href="{% url 'books:register' %}">зарегистрируйтесь</a>.</p>
 {% endif %}
