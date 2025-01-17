@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "bookify.tishenko.dev"]
 
 
 # Application definition
-
+LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
