@@ -34,3 +34,5 @@ Makefile
 doc-dev
 
 books/migrations
+
+.coverage
